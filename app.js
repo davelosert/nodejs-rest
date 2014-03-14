@@ -24,10 +24,17 @@ if ('development' == app.get('env')) {
 app.get('/', function (req, res) {
 	res.json('Go to /cloudspace to see all folders!');
 });
-app.get('/cloudspace', cloudspaceCtrl.rootFolder);
-app.get('/cloudspace/:subFolder1', cloudspaceCtrl.subFolder1);
-//app.get('/cloudspace/:subfolder2', cloudspaceCtrl.subFolder2);
+app.get('/cloudspace', cloudspaceCtrl.getRootFolder);
 
+// Set up the basic routes for get, post and del¢[]
+app.get('/cloudspace/:folder', cloudspaceCtrl.getFolder);
+app.get('/cloudspace/:folder/:subFolder', cloudspaceCtrl.getSubFolder);
+
+app.post('/cloudspace/:folder', cloudspaceCtrl.addFolder);
+app.post('/cloudspace/:folder/:subFolder', cloudspaceCtrl.addSubFolder);
+
+app.del('/cloudspace/:folder', cloudspaceCtrl.deleteFolder);
+app.del('/cloudspace/:folder/:subFolder', cloudspaceCtrl.deleteSubFolder);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
