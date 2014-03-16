@@ -3,7 +3,7 @@
 Reason
 --------------
 This Application was creatd to compare NodeJS & Express with Java & Spring 4.
-For the Java represantation, see https://github.com/Charminbear/spring4-rest
+For the Java represantation, see [here](https://github.com/Charminbear/spring4-rest).
 
 
 Quickstart
