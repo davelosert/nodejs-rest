@@ -1,45 +1,43 @@
-
 // Just a fake in-mem folderStructure for testing purposes
 var folderStructure = {
-	'media' : {
-		'documents' : 'Hello World'
+	'media': {
+		'documents': 'Hello World'
 	}
 }
 
 
-exports.getRootFolder = function (req, res) {
-	res.json(Object.keys(folderStructure));
-}
 
+// *********** RETRIEVE FOLDERS
+exports.getRootFolder = function (req, res) {
+	res.json(folderStructure);
+}
 exports.getFolder = function (req, res) {
-	res.json(Object.keys(folderStructure[req.params.folder]));
+	res.json(folderStructure[req.params.folder]);
 }
 exports.getSubFolder = function (req, res) {
-	var folder = req.params.folder;
-	var subfFolder = req.params.subFolder;
-	res.json(folderStructure[folder][subfFolder]);
+	res.json(folderStructure[req.params.folder][req.params.subFolder]);
 }
 
-exports.addFolder = function (req, res) {
-	var folderName = req.params.folder;
-	folderStructure[folderName] = {};
-	res.json(folderStructure[folderName]);
+
+// *********** CREATE FOLDERS
+exports.createFolder = function (req, res) {
+	folderStructure[req.params.folder] = {};
+	res.json(folderStructure);
 }
 
-exports.addSubFolder = function (req, res) {
-	var folderName = req.params.folder;
-	var subFolderName = req.params.subFolder;
-	folderStructure[folderName][subFolderName] = {};
-	res.json(folderStructure[folderName]);
+exports.createSubFolder = function (req, res) {
+	folderStructure[req.params.folder][req.params.subFolder] = {};
+	res.json(folderStructure[req.params.folder]);
 }
 
+
+// *********** DELETE FOLDERS
 exports.deleteFolder = function (req, res) {
 	delete folderStructure[req.params.folder];
-	res.json(Object.keys(folderStructure));
+	res.json(folderStructure);
 }
 
 exports.deleteSubFolder = function (req, res) {
-	var folderName = req.params.folder;
-	delete folderStructure[folderName][req.params.subfolder];
-	res.json(folderStructure[folderName]);
+	delete folderStructure[req.params.folder][req.params.subFolder];
+	res.json(folderStructure[req.params.folder]);
 }
